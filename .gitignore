@@ -1,0 +1,10 @@
+/db/data
+/db
+/docker
+/docker/data
+/flask/__pycache__
+.vscode
+archive.tar
+/ssl_certs
+*.sh
+.env*
