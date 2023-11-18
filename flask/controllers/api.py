@@ -7,8 +7,8 @@ def dbtest():
     connection = MySQLdb.connect(
         host='db',
         port=3306,
-        user='root',
-        passwd='root',
+        user='docker',
+        passwd='docker',
         db='db',
         # テーブル内部で日本語を扱うために追加
         charset='utf8'
@@ -55,8 +55,8 @@ def login(id, password):
     connection = MySQLdb.connect(
         host='db',
         port=3306,
-        user='root',
-        passwd='root',
+        user='docker',
+        passwd='docker',
         db='db',
         # テーブル内部で日本語を扱うために追加
         charset='utf8'
@@ -92,8 +92,8 @@ def get_Login_data():
     connection = MySQLdb.connect(
         host='db',
         port=3306,
-        user='root',
-        passwd='root',
+        user='docker',
+        passwd='docker',
         db='db',
         # テーブル内部で日本語を扱うために追加
         charset='utf8'
