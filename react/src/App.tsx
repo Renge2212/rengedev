@@ -9,14 +9,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div>
           <Header />
           <Routes>
             <Route path="/" Component={EntryPage} />
             <Route path="/login" Component={LoginPage} />
             <Route path="/service" Component={ServicePage} />
           </Routes>
-        </div>
       </BrowserRouter>
     </div>
   );
