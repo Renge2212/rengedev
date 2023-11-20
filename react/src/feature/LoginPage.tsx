@@ -21,16 +21,14 @@ function LoginPage() {
     pass: string;
   };
 
-  // const { register, handleSubmit } = useForm<Inputs>();
-
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<FormProps>({
-    mode: "onBlur", // blur イベントからバリデーションがトリガーされます。
-    criteriaMode: "all", // all -> 発生した全てのエラーが収集されます。
-    shouldFocusError: false, //true -> エラーのある最初のフィールドがフォーカスされます。
+    mode: "onBlur",
+    criteriaMode: "all",
+    shouldFocusError: false,
   });
 
   const submit: SubmitHandler<FormProps> = (data) => {
