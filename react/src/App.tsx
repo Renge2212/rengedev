@@ -5,33 +5,25 @@ import EntryPage from "./feature/EntryPage";
 import LoginPage from "./feature/LoginPage";
 import ServicePage from "./feature/ServicePage";
 import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { theme } from "./type/theme-options";
-import styled from "@emotion/styled";
-
-const StyledBox = styled(Box)(() => ({
-  margin: 0,
-  width: "100vw",
-  height: "100vh",
-  // background: "#ba68c8",
-  backgroundImage: "url(assets/background.png)",
-}));
+import { headerTheme, mainTheme } from "./type/theme-options";
 
 function App() {
   return (
     <div className="App">
-      {/* <ThemeProvider theme={theme}>
-        <CssBaseline /> */}
-      <StyledBox>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ThemeProvider theme={headerTheme}>
+          <CssBaseline />
           <Header />
+        </ThemeProvider>
+        <ThemeProvider theme={mainTheme}>
+          <CssBaseline />
           <Routes>
-            <Route path="/" Component={EntryPage} />
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/service" Component={ServicePage} />
+            <Route path="/" element={<EntryPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/service" element={<ServicePage />} />
           </Routes>
-        </BrowserRouter>
-      </StyledBox>
-      {/* </ThemeProvider> */}
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }

@@ -11,33 +11,45 @@ import {
 
 import Background from "../assets/background.png";
 
-// const primaryColor = deepPurple[400]
+const primaryColor = deepPurple[400];
 
-// export const theme = createTheme({
-//   palette: {
-//     primary: {
-//       //   light: "#757ce8",
-//       main: "#462b45",
-//       //   dark: "#002884",
-//       contrastText: "#8caa32",
-//     },
-//     secondary: deepPurple,
-//     error: red,
-//     warning: orange,
-//     info: cyan,
-//     success: green,
-//     background: {
-//       //   default: "#ba68c8",
-//       image: "url(https://example.com/image.jpg)",
-//     },
-//     text: { primary: "#ffffff" },
-//   },
-// });
-
-export const theme = createTheme({
+export const headerTheme = createTheme({
   palette: {
-    background: {
-      default: "#ba68c8",
+    primary: {
+      main: "#394650",
+      contrastText: "#ffffff",
+    },
+  },
+});
+
+export const mainTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#ffffff",
+      contrastText: "#ffffff",
+    },
+    secondary: deepPurple,
+    error: red,
+    warning: orange,
+    info: cyan,
+    success: green,
+    text: {
+      primary: "rgba(255,255,255,0.87)",
+      secondary: "rgba(255,255,255,0.6)",
+      disabled: "rgba(255,255,255,0.38)",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+          body {
+            background-image: url('../static/react/background.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+          }
+        `,
     },
   },
 });
