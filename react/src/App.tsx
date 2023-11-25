@@ -4,19 +4,25 @@ import { BrowserRouter, Link, Route, Router, Routes } from "react-router-dom";
 import EntryPage from "./feature/EntryPage";
 import LoginPage from "./feature/LoginPage";
 import ServicePage from "./feature/ServicePage";
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { headerTheme, mainTheme } from "./type/theme-options";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div>
+        <ThemeProvider theme={headerTheme}>
+          <CssBaseline />
           <Header />
+        </ThemeProvider>
+        <ThemeProvider theme={mainTheme}>
+          <CssBaseline />
           <Routes>
-            <Route path="/" Component={EntryPage} />
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/service" Component={ServicePage} />
+            <Route path="/" element={<EntryPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/service" element={<ServicePage />} />
           </Routes>
-        </div>
+        </ThemeProvider>
       </BrowserRouter>
     </div>
   );

@@ -1,10 +1,10 @@
-function Entry() {
+function EntryPage() {
+  return (
+    <div>
+      <div>rengeのポータルサイトです。</div>
+      <div>ログインだけできます</div>
+    </div>
+  );
+}
 
-    return (
-      <div>
-      </div>
-    );
-  }
-  
-  export default Entry;
-  
+export default EntryPage;

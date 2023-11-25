@@ -27,6 +27,10 @@ def get_login_data():
     res = api.get_Login_data()
     return res
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     app.run()
