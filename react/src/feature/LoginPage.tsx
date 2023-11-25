@@ -3,40 +3,48 @@ import { useEffect, useState } from "react";
 import { login } from "../function/login";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Grid, TextField, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  TextField,
+  Typography,
+  styled,
+} from "@mui/material";
 import { WhiteTextField } from "../component/WhiteTextField";
 import { WhiteButton } from "../component/WhiteButton";
 
 function LoginPage() {
+  /**
+   * useState
+   */
   const [data, setData] = useState(null);
   const [stateLogin, setStateLogin] = useState<string>("");
 
+  /**
+   * useNavigate
+   */
   const navigate = useNavigate();
 
+  /**
+   * type
+   */
   type FormProps = {
     id: string;
     password: string;
   };
 
+  /**
+   * styled
+   */
   const StyledBox = styled(Box)(() => ({
     margin: 0,
     width: "100vw",
     height: "100vh",
   }));
 
-  // const WhiteTextField = {
-  //   "& .MuiOutlinedInput-root": {
-  //     "& fieldset": {
-  //       borderColor: "#CCCCCC", // 通常時のボーダー色(アウトライン)
-  //     },
-  //     "&:hover fieldset": {
-  //       borderColor: "#DDDDDD", // ホバー時のボーダー色(アウトライン)
-  //     },
-  //   },
-  // };
-
-  // const styledTextField = styled(TextField)(whiteTextField);
-
+  // 入力欄宣言
   const {
     handleSubmit,
     control,
@@ -47,6 +55,7 @@ function LoginPage() {
     shouldFocusError: false,
   });
 
+  // ログインボタン押下時処理
   const submit: SubmitHandler<FormProps> = (data) => {
     console.log(data);
     console.log("ログイン開始");
@@ -64,7 +73,9 @@ function LoginPage() {
     });
   };
 
-  const fetchData = async () => {
+  // TODO: ログイン機能が完成したら削除
+  //テスト用データ取得・設定処理
+  const testGetAccount = async () => {
     const result = await axios(
       `${process.env.REACT_APP_API_ENDPOINT}/api/getLoginData`
     );
@@ -72,76 +83,102 @@ function LoginPage() {
     setData(result.data);
   };
 
-  // 初期化
+  // 初期化処理
   useEffect(() => {
-    fetchData();
+    testGetAccount();
   }, []);
 
+  /**
+   * HTML
+   */
   return (
-    <Box component="form" onSubmit={handleSubmit(submit)}>
-      <Grid
-        container
-        spacing={2}
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        sx={{ margin: 0, width: "100vw", height: "60vh" }}
-      >
-        <Grid item>{data && <div>{JSON.stringify(data)}</div>}</Grid>
-        <Grid item>
-          <Controller
-            name="id"
-            control={control}
-            defaultValue=""
-            rules={{
-              required: { value: true, message: "必須入力" },
-            }}
-            render={({ field, formState: { errors } }) => (
-              <WhiteTextField
-                {...field}
-                variant="outlined"
-                sx={{ display: "flex", minWidth: 223 }}
-                placeholder="ID"
-                error={errors.id ? true : false}
-                helperText={errors.id?.message as string}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item>
-          <Controller
-            name="password"
-            control={control}
-            defaultValue=""
-            rules={{
-              required: { value: true, message: "必須入力" },
-            }}
-            render={({ field, formState: { errors } }) => (
-              <WhiteTextField
-                {...field}
-                variant="outlined"
-                sx={{ display: "flex", minWidth: 223 }}
-                placeholder="パスワード"
-                error={errors.password ? true : false}
-                helperText={errors.password?.message as string}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item>
-          <WhiteButton
-            variant="outlined"
-            onClick={handleSubmit(submit)}
-            sx={{ display: "flex", minWidth: 223 }}
+    <Grid
+      container
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        width: "100vw",
+        height: "60vh",
+      }}
+    >
+      <Grid item>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(submit)}
+          sx={{
+            width: "223px",
+            height: "400px",
+          }}
+        >
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
           >
-            ログイン
-          </WhiteButton>
-        </Grid>
-        <Grid item>
-          <div>{stateLogin}</div>
-        </Grid>
+            <Grid item xs>
+              {data && <div>{JSON.stringify(data)}</div>}
+            </Grid>
+            <Grid item xs sx={{ textAlign: "left" }}>
+              <Typography variant="h3">Login</Typography>
+            </Grid>
+            <Divider />
+            <Grid item xs={12}>
+              <Controller
+                name="id"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: { value: true, message: "必須入力" },
+                }}
+                render={({ field, formState: { errors } }) => (
+                  <WhiteTextField
+                    {...field}
+                    variant="outlined"
+                    sx={{ minWidth: 223 }}
+                    placeholder="ID"
+                    error={errors.id ? true : false}
+                    helperText={errors.id?.message as string}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: { value: true, message: "必須入力" },
+                }}
+                render={({ field, formState: { errors } }) => (
+                  <WhiteTextField
+                    {...field}
+                    variant="outlined"
+                    sx={{ minWidth: 223 }}
+                    placeholder="パスワード"
+                    error={errors.password ? true : false}
+                    helperText={errors.password?.message as string}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <WhiteButton
+                variant="outlined"
+                onClick={handleSubmit(submit)}
+                sx={{ minWidth: 223 }}
+              >
+                ログイン
+              </WhiteButton>
+            </Grid>
+            <Grid item xs={12}>
+              <div>{stateLogin}</div>
+            </Grid>
+          </Grid>
+        </Box>
       </Grid>
-    </Box>
+    </Grid>
   );
 }
 
