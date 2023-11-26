@@ -1,17 +1,8 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { login } from "../function/login";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  TextField,
-  Typography,
-  styled,
-} from "@mui/material";
+import { Box, Divider, Grid, Typography, styled } from "@mui/material";
 import { WhiteTextField } from "../component/WhiteTextField";
 import { WhiteButton } from "../component/WhiteButton";
 
@@ -19,7 +10,6 @@ function LoginPage() {
   /**
    * useState
    */
-  const [data, setData] = useState(null);
   const [stateLogin, setStateLogin] = useState<string>("");
 
   /**
@@ -34,15 +24,6 @@ function LoginPage() {
     id: string;
     password: string;
   };
-
-  /**
-   * styled
-   */
-  const StyledBox = styled(Box)(() => ({
-    margin: 0,
-    width: "100vw",
-    height: "100vh",
-  }));
 
   // 入力欄宣言
   const {
@@ -73,21 +54,6 @@ function LoginPage() {
     });
   };
 
-  // TODO: ログイン機能が完成したら削除
-  //テスト用データ取得・設定処理
-  const testGetAccount = async () => {
-    const result = await axios(
-      `${process.env.REACT_APP_API_ENDPOINT}/api/getLoginData`
-    );
-    console.log(result.data);
-    setData(result.data);
-  };
-
-  // 初期化処理
-  useEffect(() => {
-    testGetAccount();
-  }, []);
-
   /**
    * HTML
    */
@@ -116,9 +82,6 @@ function LoginPage() {
             justifyContent="center"
             alignItems="center"
           >
-            <Grid item xs>
-              {data && <div>{JSON.stringify(data)}</div>}
-            </Grid>
             <Grid item xs sx={{ textAlign: "left" }}>
               <Typography variant="h3">Login</Typography>
             </Grid>
