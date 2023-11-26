@@ -24,8 +24,20 @@ def login_verify():
 
 @app.route('/api/getLoginData')
 def get_login_data():
-    res = api.get_Login_data()
-    return res
+    return api.get_Login_data()
+
+@app.route('/api/checkAccountExist')
+def check_account_exist():
+    id = request.args.get('id')
+    return {"exist": api.check_account_exist(id)}
+
+@app.route('/api/createAccount')
+def create_account():
+    print(f"login request: {request}")
+    id = request.args.get('id')
+    password = request.args.get('password')
+    api.create_account(id, password)
+    return ('', 204)
 
 @app.errorhandler(404)
 def not_found(e):
